@@ -3,4 +3,4 @@ node_js:
   - "4.2.2"
 before_script:
   - npm i -g gulp
-script: gulp
+script: gulp && karma start karma.conf.js
