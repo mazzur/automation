@@ -1,6 +1,10 @@
 language: node_js
 node_js:
-  - "4.2.2"
+- 4.2.2
 before_script:
-  - npm i -g gulp
+- npm i -g gulp
 script: gulp && karma start karma.conf.js
+provider: heroku
+deploy:
+  api_key:
+    secure: EZt7ZAjA7MAAJK/OLmrE2QUirjr2YCJKepIDeFa1HSlY8Wt8YTf4wDRjkHRgaTxBxxkwf1rDn5xZ5DmHCwkVyici9auee2isZKuA9oJm0/PF9c3+E69hJrkpwARGH0O0R0BjL8UWZO8PZqP8Lur0E01x6PJhcIdmSegRzkbN7gqAV5k8EKc+hYi528ps+queqa1e2Ya3GyrZ1ziByYHjanW2bpr4a8oWyftfjTwyIqx6/DBNMeIXJu6v095aTR/Z20w0yHjIH6gWF+DbYNmA//tb+u8i1s4aQwLhMtQwmvimkiqDGIHmd7La5y9ipXAffm3m3KiABt7IccAENVPWP6WWaSX+hSIS/As5Wdfeptiqjp6li7ZksWxp3y53n/q/Cx00cPjk81g1JC6mD2pFfafPodo/WzvduBgAc+4TaKhRQnLQ+Yb2lhO8LDIyLgF+XL3e+673Qu/ldMKmYHlER1PPhtcthmVvDtLeHqWc411CFd2llR6yw6aBb30sqtUjc5NEr43UtQvZOVU32zs1BGYutpha8H4txRwj0vsv8NtYimrpWuqscqpb45dbSBb90Nwznbk7SmzZ0GzCPGlpWK7ckjL7F6eBSnkktDwKtreTP+zXAEIdrSBbJ9Dm3+mBTnuYYSAuCEeXl8rPb43XMoPtJgGlWbz1LaJNwU37IVU=
