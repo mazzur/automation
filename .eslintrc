@@ -7,7 +7,9 @@ rules:
     - always
 env:
   es6: true
-  browser: true
+  browser: true,
+  node: true,
+  jasmine: true
 ecmaFeatures:
   modules: true
 extends: 'eslint:recommended'
