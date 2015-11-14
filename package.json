@@ -34,5 +34,8 @@
     "phantomjs": "^1.9.18",
     "rimraf": "^2.4.3",
     "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "express": "^4.13.3"
   }
 }
