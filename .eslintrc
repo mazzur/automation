@@ -1,0 +1,13 @@
+rules:
+  quotes:
+    - 2
+    - single
+  semi:
+    - 2
+    - always
+env:
+  es6: true
+  browser: true
+ecmaFeatures:
+  modules: true
+extends: 'eslint:recommended'
