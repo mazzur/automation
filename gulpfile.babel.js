@@ -6,6 +6,25 @@ import sourcemaps from 'gulp-sourcemaps';
 import browserify from 'browserify';
 import source from 'vinyl-source-stream';
 import eslint from 'gulp-eslint';
+import browserSync from 'browser-sync';
+import watchify from 'watchify';
+
+const bundler = watchify(browserify(Object.assign({}, watchify.args, {
+    entries: ['./src/js/dummy.js'],
+    debug: true,
+    transform: [['babelify', {
+        presets: ['es2015']
+    }]]
+})));
+
+gulp.task('clean', (cb) => {
+    rimraf(config.patterns.dist, cb);
+});
+
+gulp.task('html', () => {
+    gulp.src(config.paths.html)
+        .pipe(gulp.dest(config.paths.dist));
+});
 
 gulp.task('stylus', () => {
     gulp.src(config.patterns.stylus)
@@ -15,21 +34,8 @@ gulp.task('stylus', () => {
         .pipe(gulp.dest(config.paths.dist));
 });
 
-gulp.task('html', () => {
-    gulp.src(config.paths.html)
-        .pipe(gulp.dest(config.paths.dist));
-});
-
-gulp.task('clean', (cb) => {
-    rimraf(config.patterns.dist, cb);
-});
-
-gulp.task('js', () => {
-    browserify(config.paths.mainjs)
-        .transform('babelify', {
-            presets: ['es2015']
-        })
-        .bundle()
+gulp.task('bundle', ['eslint'], () => {
+    return bundler.bundle()
         .pipe(source('bundle.js'))
         .pipe(gulp.dest(config.paths.dist));
 });
@@ -41,5 +47,20 @@ gulp.task('eslint', () => {
         .pipe(eslint.failAfterError());
 });
 
-gulp.task('build', ['clean', 'html', 'stylus', 'eslint', 'js']);
+gulp.task('refresh', ['build'], browserSync.reload);
+
+gulp.task('watch', ['bundle'], () => {
+    let watcher = gulp.watch('./src/**/*', ['refresh']);
+
+    watcher.on('change', (event) => {
+        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    });
+});
+
+gulp.task('browser-sync', ['watch'], () => {
+    return browserSync({server: {baseDir: './dist'}});
+});
+
+gulp.task('build', ['clean', 'html', 'stylus', 'eslint', 'bundle']);
+gulp.task('serve', ['browser-sync']);
 gulp.task('default', ['build']);
