@@ -5,6 +5,7 @@ import rimraf from 'rimraf';
 import sourcemaps from 'gulp-sourcemaps';
 import browserify from 'browserify';
 import source from 'vinyl-source-stream';
+import eslint from 'gulp-eslint';
 
 gulp.task('stylus', () => {
     gulp.src(config.patterns.stylus)
@@ -33,5 +34,12 @@ gulp.task('js', () => {
         .pipe(gulp.dest(config.paths.dist));
 });
 
-gulp.task('build', ['clean', 'html', 'stylus', 'js']);
+gulp.task('eslint', () => {
+    gulp.src(config.patterns.lint)
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
+});
+
+gulp.task('build', ['clean', 'html', 'stylus', 'eslint', 'js']);
 gulp.task('default', ['build']);

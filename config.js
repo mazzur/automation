@@ -7,6 +7,7 @@ const config = {
     },
     patterns: {
         dist: 'dist/**',
+        lint: ['**/*.js','!node_modules/**', '!dist/**'],
         stylus: 'src/styl/**.styl'
     }
 };
