@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "karma start karma.conf.js",
-    "install": "gulp build",
+    "postinstall": "gulp build",
     "start": "node app"
   },
   "repository": {
