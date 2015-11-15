@@ -33,4 +33,5 @@ gulp.task('js', () => {
         .pipe(gulp.dest(config.paths.dist));
 });
 
-gulp.task('default', ['clean', 'html', 'stylus', 'js']);
+gulp.task('build', ['clean', 'html', 'stylus', 'js']);
+gulp.task('default', ['build']);

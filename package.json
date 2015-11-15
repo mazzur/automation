@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "karma start karma.conf.js",
-    "prestart": "gulp",
+    "install": "gulp build",
     "start": "node app"
   },
   "repository": {
