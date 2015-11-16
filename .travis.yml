@@ -1,10 +1,15 @@
 language: node_js
 node_js:
 - 4.2.2
-deploy:
-  provider: heroku
-  api_key:
-    secure: EZRzMju58XzH0+Y0z/b1mDN7CrtnrmHuDC2ahL2mi2JnTbSvAr56riMGdDxHBPwuelTcxDBNCSCoelOG+3Vf837vVihn4pnWSc0R/YvwO7tFCnsUHdBfBh+oQT4Hw9R0qxDaBA4HYWYgHoRSsawAJ8SrOQa+RvVqNYvLFOAJkmC6s7vc9TTUjQbGfSel6t2budhkc7bH8++mj6SQkEDM61vnnOj9abIHRB1Z9GsCwx68fS9vGe7ZlR2dxQ31vbWfLYKykHXo/mKIMUFbCuxQ0PG8SCfzVzsFCleHwtRrHkt7aOneRZ4mMBDBm03DsPGrx3ml12UpqW9Qpzk4lsB3K5M1vBK05XP9tkN9QSHo0RRLBYu0mwE5pauxYl3mzzAtsR+/53tccjK7Jt6Qh48vDLjumougzTbQRp3wgo41Xnmd9XvV2sasn2QcYwExywp/SvwDabW1cJCj9AOuG+YtgApLftLfAeqjvodF3OnyO2Xw+kmQiEXwuMVg55YWX7tD/ellZqeobct38UwPqzCiYehSJ2mi3Ax8ZpfzL1+Sa99+4CCmhKNX7msPnFJI+8bGTGcH7nPvvNRAPp/EdmUQ++tZBmNHTUbB6vET7u1Ox8YsAL4dmyQCVnVrPG2Kbm95R3gFX3AqsRDdMVkAdqlstsxcapOw+3KvfwdWcNPjbe8=
-  app: mp-automation
-  on:
-    repo: mazzur/automation
+env:
+  global:
+    secure: Gqagplyb7P59tVNLaJS8jBMtrNI171m/2gX77XlUIkvGq7cNvFLTEeEAh8ntXnb0rpedX18Y6U6Eui2cFLB4N/A1Pz0X4NHRCDmhzKNuEkyVL+iP9gqANzdG+GVwFlshxyShYbDwt73AcitePDXWEbO5U41EubFItUFXYBL7enygHBpmaDimGOG+TbWlEWB275D5gPjEAkEd2xn+zlicS0iB97xcr6TKVgmle4tTh2kj2xvASXgOpoJoXjLodOq1HRoJYATRVqiuLJQc+Y0QRWDqjh9sg1JkSAtNaK+NgPUXQAwVOFMv4X5mx9rQnTRXAxPFT/iVXaCTj3L625Dm4ATC2YBwi1u6SjJx2NIirUyLkBeWvzBGS2qpH1jox+akbE5EsaNQHhrYBJnscmtGugEy5cmhLlfodlfrqx7su4+sKI/nbqe8IVY+UEwTn5TERXZaILv+ecjVXo3vbO7TktaZ5JwxhpOCssqU+wyH2vr6v/b+gzqR67zn4rFGEND1zlaApBgJm/edLwew6t/F1VP2yeYV/Cs+r/6IUSdLthihaKCiICd+fmc84Mw8T+3HjaBrjQW8M8D2EE+BpXl6U0ZuJ0GdoZRhhLgZJinPUh5lL7Honk5MAHwXi+egRnui7ukHMGYp2k0+IQt9DDbC4oyMp6rJ00IGpqElYjMAIj8=
+after_success:
+  - wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+  - git remote add heroku git@heroku.com:mp-automation.git
+  - echo "Host heroku.com" >> ~/.ssh/config
+  - echo "   StrictHostKeyChecking no" >> ~/.ssh/config
+  - echo "   CheckHostIP no" >> ~/.ssh/config
+  - echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+  - yes | heroku keys:add
+  - yes | git push heroku master
