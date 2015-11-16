@@ -1,5 +1,6 @@
 # automation
 [![Build Status](https://travis-ci.org/mazzur/automation.svg?branch=develop)](https://travis-ci.org/mazzur/automation)
+[app on heroku](https://mp-travis-heroku.herokuapp.com/)
 
 ## npm scripts
 `npm test` - run karma
